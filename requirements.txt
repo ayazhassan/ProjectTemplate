@@ -1,0 +1,132 @@
+# FILE: requirements.txt
+# JRC-AI Python runtime dependencies (pin conservatively for reproducibility)
+# Python >= 3.11
+
+# Core scientific stack
+numpy~=1.26
+scipy~=1.13
+pandas~=2.2
+matplotlib~=3.8
+
+# Machine learning (uncomment what you need)
+scikit-learn~=1.5
+# torch~=2.3            # PyTorch (CPU); choose CUDA-specific wheels if needed
+# tensorflow~=2.16      # If using TensorFlow instead of PyTorch
+
+# Notebooks & tooling
+jupyterlab~=4.2
+ipykernel~=6.29
+
+# I/O and utils (optional; uncomment as needed)
+# h5py~=3.11
+# pytdms~=1.5
+# pyyaml~=6.0
+# requests~=2.32
+# tqdm~=4.66
+
+
+# FILE: requirements-dev.txt
+# JRC-AI Python development & QA dependencies
+
+# Testing
+pytest~=8.3
+
+# Linting/formatting
+ruff~=0.5
+flake8~=7.1
+black~=24.8
+
+# Type checking (optional)
+mypy~=1.11
+
+# Pre-commit hooks (optional)
+pre-commit~=3.7
+
+
+# FILE: matlab-requirements.txt
+# JRC-AI MATLAB environment requirements (list of products/toolboxes)
+# MATLAB Release: R2023b or later (recommended)
+
+MATLAB
+Signal Processing Toolbox
+Wavelet Toolbox
+Statistics and Machine Learning Toolbox
+Parallel Computing Toolbox
+
+# Optional (uncomment if your project needs them)
+# Control System Toolbox
+# Optimization Toolbox
+# Deep Learning Toolbox
+# DSP System Toolbox
+
+
+# FILE: setup.m
+% JRC-AI MATLAB project setup
+% - Verifies required toolboxes
+% - Adds local MATLAB source paths
+% Usage: run('setup.m') from the repo root.
+
+function setup()
+    fprintf('[JRC-AI] MATLAB setup starting...\n');
+
+    % --- Required toolboxes ---
+    requiredToolboxes = { ...
+        'Signal Processing Toolbox', ...
+        'Wavelet Toolbox', ...
+        'Statistics and Machine Learning Toolbox', ...
+        'Parallel Computing Toolbox' ...
+    };
+
+    % --- Optional toolboxes (informational only) ---
+    optionalToolboxes = { ...
+        'Control System Toolbox', ...
+        'Optimization Toolbox', ...
+        'Deep Learning Toolbox', ...
+        'DSP System Toolbox' ...
+    };
+
+    % Check required toolboxes
+    v = ver;
+    installed = string({v.Name});
+    missing = {};
+
+    for i = 1:numel(requiredToolboxes)
+        if ~any(strcmpi(requiredToolboxes{i}, installed))
+            missing{end+1} = requiredToolboxes{i}; %#ok<AGROW>
+        end
+    end
+
+    if ~isempty(missing)
+        fprintf(2, '[JRC-AI] Missing required toolbox(es):\n');
+        for i = 1:numel(missing)
+            fprintf(2, '  - %s\n', missing{i});
+        end
+        error('[JRC-AI] Please install the missing toolbox(es) before continuing.');
+    else
+        fprintf('[JRC-AI] All required toolboxes found.\n');
+    end
+
+    % Report optional toolboxes availability
+    fprintf('[JRC-AI] Optional toolboxes detected:\n');
+    for i = 1:numel(optionalToolboxes)
+        if any(strcmpi(optionalToolboxes{i}, installed))
+            fprintf('  [OK] %s\n', optionalToolboxes{i});
+        else
+            fprintf('  [--] %s (not installed)\n', optionalToolboxes{i});
+        end
+    end
+
+    % Add project source paths (adjust as needed)
+    addIfExists('src_matlab');
+    addIfExists('matlab');
+    addIfExists('scripts');
+
+    fprintf('[JRC-AI] MATLAB setup complete.\n');
+end
+
+function addIfExists(p)
+    if isfolder(p)
+        addpath(genpath(p));
+        fprintf('[JRC-AI] Added to path: %s\n', p);
+    end
+end
