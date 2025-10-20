@@ -1,20 +1,10 @@
-# Contributing to JRC-AI Projects
+# Contributing to Projects
 
-Thanks for your interest in contributing to the **SDAIA-KFUPM Joint Research Center for Artificial Intelligence (JRC-AI)** projects! This guide explains how to get set up, propose changes, and meet our quality, security, and licensing standards.
-
----
-
-## 1) How to ask questions or propose work
-
-* **Bugs / features** → open a GitHub Issue using the appropriate template.
-* **Small fixes** → open a Pull Request (PR) directly; mark it **Draft** if still in progress.
-* **Large changes / design work** → open an Issue first and propose an approach (optionally add a short “RFC” doc in `docs/`).
-
-
+This guide explains how to get set up, propose changes, and meet the quality, security, and licensing standards.
 
 ---
 
-## 2) Development setup
+## 1) Development setup
 
 ### Python
 
@@ -31,17 +21,12 @@ Thanks for your interest in contributing to the **SDAIA-KFUPM Joint Research Cen
 
    ```bash
    conda env create -f environment.yml
-   conda activate jrc-ai-env
+   conda activate your-env
    ```
-
-### MATLAB
-
-* Ensure the required toolboxes in `matlab-requirements.txt` are installed.
-* Run `setup.m` once to check toolboxes and add paths.
 
 ---
 
-## 3) Workflow & branching
+## 2) Workflow & branching
 
 * Default branch: **`main`**.
 * Create feature branches: `feature/<short-desc>`, `fix/<short-desc>`, `docs/<short-desc>`.
@@ -62,7 +47,7 @@ Thanks for your interest in contributing to the **SDAIA-KFUPM Joint Research Cen
 
 ---
 
-## 4) Quality bar (what CI expects)
+## 3) Quality bar (what CI expects)
 
 * **Formatting & linting:** `make fmt` and `make lint` (uses `black`, `ruff`, `flake8`).
 * **Tests:** add/maintain **pytest** unit tests; run `make test`. Target **>=80%** coverage for changed code.
@@ -78,7 +63,7 @@ A PR is ready when:
 
 ---
 
-## 5) Style guides
+## 4) Style guides
 
 ### Python
 
@@ -86,12 +71,6 @@ A PR is ready when:
 * One module = one purpose; keep functions short and cohesive.
 * Public APIs documented with docstrings (`"""Summary\n\nArgs:\nReturns:\nRaises:\n"""`).
 * Prefer **pure Python** and vectorized NumPy/Pandas; isolate heavy I/O.
-
-### MATLAB
-
-* One function per file; add help text and examples at the top.
-* Use `matlab.unittest` for tests in `tests_matlab/`.
-* Avoid modifying the MATLAB path globally; rely on `setup.m`.
 
 ### Notebooks
 
@@ -101,15 +80,14 @@ A PR is ready when:
 
 ---
 
-## 6) Documentation
+## 5) Documentation
 
 * Keep **README** up to date: overview, quick start, dependencies, how to run, reproduction notes, and license.
 * Add any detailed docs to `docs/` and link from the README.
-* If related to a **paper**, include its **BibTeX** in the README and `CITATION.cff`.
 
 ---
 
-## 7) Data, models, and large files
+## 6) Data, models, and large files
 
 * **Do not commit** confidential, proprietary, or personal data.
 * Use **Git LFS** or external storage for large artefacts; provide a small sample or a download script.
@@ -118,18 +96,17 @@ A PR is ready when:
 
 ---
 
-## 8) Security & privacy
+## 7) Security & privacy
 
 * **Never commit secrets** (API keys, tokens, passwords).
 
   * Use `.env` locally (already in `.gitignore`) and **GitHub Actions Secrets** in CI.
 * Remove or anonymize PII; follow institutional/contractual data handling rules.
-* Report vulnerabilities privately to **[security@jrc-ai.example](mailto:security@jrc-ai.example)** (see `SECURITY.md`).
 * Avoid introducing dependencies with known high-severity CVEs; Dependabot is enabled.
 
 ---
 
-## 9) Licensing & intellectual property
+## 8) Licensing & intellectual property
 
 * **Inbound license (default):** By contributing, you agree your contribution is licensed under **PolyForm Noncommercial 1.0.0** (for code) unless the maintainers agree otherwise in writing **before** the PR.
 * Add an **SPDX header** at the top of source files:
@@ -143,11 +120,11 @@ A PR is ready when:
   * Ensure its license **permits** our use and redistribution.
   * **Preserve** original LICENSE/NOTICE files and add entries to `THIRD_PARTY_NOTICES.md`.
   * Avoid GPL/AGPL libraries unless explicitly approved (they may conflict with our main license).
-* **Commercial use:** our default code license is **Noncommercial**. Commercial users must obtain a separate license from the center (**[licensing@jrc-ai.example](mailto:licensing@jrc-ai.example)**).
+* **Commercial use:** our default code license is **Noncommercial**.
 
 ---
 
-## 10) Versioning & releases
+## 9) Versioning & releases
 
 * We follow **SemVer** (MAJOR.MINOR.PATCH).
 * Tag releases, generate release notes, and update `CITATION.cff`.
@@ -155,7 +132,7 @@ A PR is ready when:
 
 ---
 
-## 11) Contribution checklist (for PRs)
+## 10) Contribution checklist (for PRs)
 
 * [ ] Issue linked and scope agreed (for non-trivial changes)
 * [ ] Code formatted & linted (`make fmt && make lint`)
@@ -168,7 +145,7 @@ A PR is ready when:
 
 ---
 
-## 12) Maintainers
+## 11) Maintainers
 
 * Ensure branch protections and required checks are enabled.
 * Enforce license and security policies during review.
@@ -176,11 +153,3 @@ A PR is ready when:
 * Close stale issues after reasonable follow-up.
 
 ---
-
-## 13) Contact
-
-* General/project questions: **[majed.alshaibani@kfupm.edu.sa](mailto:majed.alshaibani@kfupm.edu.sa)**
-* Licensing: **[majed.alshaibani@kfupm.edu.sa](mailto:majed.alshaibani@kfupm.edu.sa)**
-* Security: **[majed.alshaibani@kfupm.edu.sa](mailto:majed.alshaibani@kfupm.edu.sa)**
-
-Thank you for helping us build reliable, reproducible, and responsibly licensed AI research at **JRC-AI**!
