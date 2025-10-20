@@ -38,7 +38,7 @@ This summary grants NO rights.
    See “THIRD_PARTY_NOTICES” or component folders for details.
 
 5) TRADEMARKS
-   Names, logos, and trademarks of SDAIA-KFUPM Joint Research Center for Artificial Intelligence (JRC-AI) are NOT licensed by the License.
+   Names, logos, and trademarks of KFUPM are NOT licensed by the License.
    Do not use branding without prior written permission.
 
 6) NO WARRANTY; LIMITATION OF LIABILITY
@@ -56,6 +56,5 @@ This summary grants NO rights.
 
 CONTACT
    Address: Dhahran, 31261, KSA
-   Phone: +966-13-860-7757
-   Email: jrc-ai@kfupm.edu.sa
+   Email: ayaz.khan@kfupm.edu.sa
 
